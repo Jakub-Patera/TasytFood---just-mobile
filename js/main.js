@@ -12,3 +12,58 @@ const showMenu = (toggleId, navId) =>{
 }
 
 showMenu('nav-toggle', 'nav-menu')
+
+/* Remove Mobile Menu */
+const navLink = document.querySelectorAll('.nav__link')
+
+function linkAction(){
+    const navMenu = document.getElementById('nav-menu')
+    navMenu.classList.remove('show-menu')
+}
+
+navLink.forEach(n => n.addEventListener('click', linkAction))
+
+/* Scroll to active link */
+const sections = document.querySelectorAll('section[id]')
+
+
+function scrollActive(){
+    const scrollY = window.pageYOffset
+
+    sections.forEach(curent => {
+        const sectionHeight = curent.offsetHesight
+        const sectionTop = curent.offsetTop - 50;
+        sectionId = curent.getAttribute('id')
+
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+            document.querySelector('.nav__menu a[href*='+ sectionId + ']').classList.add('active-link')
+        }else{
+            document.querySelector('.nav__menu a[href*='+ sectionId + ']').classList.remove('active-link')
+        }
+    })
+}
+
+window.addEventListener('scroll', scrollActive)
+
+
+/* Header BG change */
+
+function scrollHeader(){
+    const nav = document.getElementById('header')
+
+    if(this.scrollY >= 200) nav.classList.add('scroll-header');
+    else nav.classList.remove('scroll-header')
+}
+window.addEventListener('scroll',scrollHeader)
+
+
+/* -- Scroll Top -- */ 
+
+
+function scrollTop(){
+    const nav = document.getElementById('scroll-top')
+
+    if(this.scrollY >= 650) nav.classList.add('scroll-top');
+    else nav.classList.remove('scroll-top')
+}
+window.addEventListener('scroll',scrollTop)
